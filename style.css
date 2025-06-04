@@ -21,3 +21,13 @@ h1 {
 .row {
     display: flex;
 }
+
+#squares {
+    height: 40px;
+    width: 80px;
+    border-radius: 4px;
+}
+
+#squares:hover {
+    cursor: pointer;
+}

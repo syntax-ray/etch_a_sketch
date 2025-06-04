@@ -2,6 +2,7 @@ let BOX_SIZE = 40;
 let CANVAS_SIZE = 16
 
 let canvas = document.querySelector("#canvas");
+let btn = document.querySelector('#squares');
 
 const COLORS = [
     "#F0F8FF", "#FAEBD7", "#00FFFF", "#7FFFD4", "#F0FFFF", "#F5F5DC", "#FFE4C4",
@@ -33,11 +34,12 @@ function get_random_color () {
 }
 
 
-function create_grid() {
-    for (i = 0; i < CANVAS_SIZE; i++) {
+function create_grid(canvasSize=CANVAS_SIZE) {
+    canvas.innerHTML = "";
+    for (i = 0; i < canvasSize; i++) {
         let row = document.createElement("div")
         row.classList.add("row") 
-        for (y = 0; y < CANVAS_SIZE; y++) {
+        for (y = 0; y < canvasSize; y++) {
             let div = document.createElement("div");
             div.style.height = `${BOX_SIZE}px`;
             div.style.width = `${BOX_SIZE}px`;
@@ -51,3 +53,10 @@ function create_grid() {
 
 
 create_grid()
+
+btn.addEventListener('click', () => {
+    let newSquaresValue = parseInt(prompt("Enter the number of squares per side you would like the default is 16, the maximum is 100"));
+    if (!isNaN(newSquaresValue) && newSquaresValue > 0 && newSquaresValue <= 100) {
+        create_grid(newSquaresValue)
+    }
+});

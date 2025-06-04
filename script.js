@@ -34,15 +34,15 @@ function get_random_color () {
 }
 
 
-function create_grid(canvasSize=CANVAS_SIZE) {
+function create_grid(canvasSize=CANVAS_SIZE, box_size = BOX_SIZE) {
     canvas.innerHTML = "";
     for (i = 0; i < canvasSize; i++) {
         let row = document.createElement("div")
         row.classList.add("row") 
         for (y = 0; y < canvasSize; y++) {
             let div = document.createElement("div");
-            div.style.height = `${BOX_SIZE}px`;
-            div.style.width = `${BOX_SIZE}px`;
+            div.style.height = `${box_size}px`;
+            div.style.width = `${box_size}px`;
             div.style.border = `1px solid black`;
             div.addEventListener('mouseenter', () => div.style.backgroundColor = get_random_color());
             row.appendChild(div)
@@ -51,12 +51,17 @@ function create_grid(canvasSize=CANVAS_SIZE) {
     }
 }
 
+function calculate_box_size (canvas_size) {
+    const containerSize = 640; 
+    return containerSize / canvas_size;
+}
+
 
 create_grid()
 
 btn.addEventListener('click', () => {
     let newSquaresValue = parseInt(prompt("Enter the number of squares per side you would like the default is 16, the maximum is 100"));
     if (!isNaN(newSquaresValue) && newSquaresValue > 0 && newSquaresValue <= 100) {
-        create_grid(newSquaresValue)
+        create_grid(newSquaresValue, calculate_box_size(newSquaresValue))
     }
 });
